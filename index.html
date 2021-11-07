@@ -162,27 +162,43 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Unity_Empty" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-211107_ShieldEffect_Unity" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/04/Unity_Empty/">UNITY相关文章</a>
+      <a class="article-title" href="/2021/11/07/211107_ShieldEffect_Unity/">能量护盾特效_Unity版</a>
     </h1>
   
 
         
-        <a href="/2021/11/04/Unity_Empty/" class="archive-article-date">
-  	<time datetime="2021-11-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-04</time>
+        <a href="/2021/11/07/211107_ShieldEffect_Unity/" class="archive-article-date">
+  	<time datetime="2021-11-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="近期期待！"><a href="#近期期待！" class="headerlink" title="近期期待！"></a>近期期待！</h3>
+        <p>&emsp;这是unityJapan办的官方演讲会中讲解的一个用shaderGraph制作能量护盾的例子。由于用到SG,所以是基于URP的。（HDRP应该也可以用）<br>官方油管地址：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=7ToExWKVZW0&amp;t=2407s">https://www.youtube.com/watch?v=7ToExWKVZW0&amp;t=2407s</a><br>最终效果如图：<br><img src="/2021/11/07/211107_ShieldEffect_Unity/Shield_01.png" alt="最终效果"><br>主要分解为步骤步骤：<br>&emsp;<strong>1.检测物体之间的接触边缘</strong><br>&emsp;<strong>2.画出透明物体的边缘</strong><br>&emsp;*<em>3.给</em>边缘加上花纹*<br>&emsp;<strong>4.扭曲透过物体的像</strong></p>
+<h2 id="检测物体之间的接触边缘"><a href="#检测物体之间的接触边缘" class="headerlink" title="检测物体之间的接触边缘"></a>检测物体之间的接触边缘</h2><h3 id="STEP1-设置管线创建一个新的Shader"><a href="#STEP1-设置管线创建一个新的Shader" class="headerlink" title="STEP1. 设置管线创建一个新的Shader"></a>STEP1. 设置管线创建一个新的Shader</h3><p>&emsp;由于要通过深度来检测接触边缘，所以在管线的配置文件<a href="#bib1" id="bib1ref"><sup>[1]</sup></a>将其中的Depth Texture勾选上。由于不需要进行光照计算，建立一个Unlit shader，将master节点设定改为transparent渲染队列和双面渲染。</p>
+<h3 id="STEP2-利用sceenDepth节点进行接触检测"><a href="#STEP2-利用sceenDepth节点进行接触检测" class="headerlink" title="STEP2. 利用sceenDepth节点进行接触检测"></a>STEP2. 利用sceenDepth节点进行接触检测</h3><p>&emsp;建立一个screenDepth<a href="#bib2" id="bib2ref"><sup>[2]</sup></a>节点，采样改为eye，这个节点是获得屏幕上每个像素点对应的深度信息（只能对应显示的非透明物体上的点）。再建立一个screenPosition<a href="#bib3" id="bib3ref"><sup>[3]</sup></a>节点，模式改为raw来获取该material所在物体的深度信息。把screenPosition节点里的w分量分出来，用sceenDepth节点输出的值去减，最后输出到master节点上的color看一下。发现同球体接触的边缘变黑。其实减去的值就是模型上点延视线方向达到的最近的非透明物体的距离，这个值0~∞的。于是设置一个变量a减去这个值的话，范围就变成-∞~0~a。因此可以通过a来控制边缘的厚度。由于透明度0-1，所以用smoothStep<a href="#bib4" id="bib4ref"><sup>[4]</sup></a>来限制输出值的范围，同时由于其插值的特性，用来做边缘光带的过渡。最终节点如图：<br><img src="/2021/11/07/211107_ShieldEffect_Unity/Shield_02.png" alt="边缘检测节点连接"></p>
+<h2 id="画出透明物体的边缘"><a href="#画出透明物体的边缘" class="headerlink" title="画出透明物体的边缘"></a>画出透明物体的边缘</h2><p>&emsp;一般的物体可以通过FresnelEffect节点简单的做出边缘发光的效果。但是对于双面绘制的物体行不通，因为由于菲涅尔的原理，导致背面的节点无法实现边缘发光的效果。于是根据菲涅尔的原理，要重新连一个适用于双面的菲涅尔。其实也很简单，就是将表面法线与视线方向单位向量点乘后取绝对值再用1减去这个值即可。<br><img src="/2021/11/07/211107_ShieldEffect_Unity/Shield_03.png" alt="双面菲涅尔原理"><br>连接的节点图如下：<br><img src="/2021/11/07/211107_ShieldEffect_Unity/Shield_04.png" alt="双面菲涅尔节点连接"></p>
+<h2 id="边缘加上花纹"><a href="#边缘加上花纹" class="headerlink" title="边缘加上花纹"></a>边缘加上花纹</h2><p>花纹图案的实现就比较简单，就是在原本基础上导入一张黑白花纹的图案（因为颜色控制是用baseColor）。之后再叠加一层噪声纹理，通过UV动画让花纹动起来就行。有趣的是可以通过UV和和sin节点，形成移动的黑白条纹。因为有sin会有负值，再用remap重映射至0~1。<br><img src="/2021/11/07/211107_ShieldEffect_Unity/Shield_05.png" alt="黑白条纹连接"></p>
+<h2 id="扭曲透过物体的像"><a href="#扭曲透过物体的像" class="headerlink" title="扭曲透过物体的像"></a>扭曲透过物体的像</h2><p>&emsp;接下来要做给透过护盾时光线扭曲的效果。 由于之前的shader是用了alpha通道，而扭曲像其实是通过将渲染不透明物体后的结果按屏幕坐标贴到物体上来实现的。由于透过的地方本来alpha为零，也就无法显示贴上去的颜色，所以要另开一个shader和材质做目标物体的第二材质，同时要保证这个材质的的渲染队列在力场材质之前。</p>
+<h3 id="STEP1-设置管线创建一个新的Shader-1"><a href="#STEP1-设置管线创建一个新的Shader-1" class="headerlink" title="STEP1. 设置管线创建一个新的Shader"></a>STEP1. 设置管线创建一个新的Shader</h3><p>由于要要获得不透明物体的渲染结果，在渲染管线的配置文件<a href="#bib1" id="bib1ref"><sup>[1]</sup></a>的设定中开启Opaque Texture。由于同样不需要进行光照计算，建立一个Unlit shader，将master节点设定改为transparent渲染队列。</p>
+<h3 id="STEP2-接受不透明物体的渲染结果"><a href="#STEP2-接受不透明物体的渲染结果" class="headerlink" title="STEP2. 接受不透明物体的渲染结果"></a>STEP2. 接受不透明物体的渲染结果</h3><p>建一个texture2D的变量，reference填入_CameraOpaqueTexture，将expored勾去掉，即可用来接收渲染场景的贴图。<br><img src="/2021/11/07/211107_ShieldEffect_Unity/Shield_06.png" alt="接受变量的设置"></p>
+<p>将这个texture和ScreenPosition<a href="#bib3" id="bib3ref"><sup>[3]</sup></a>（这回用default模式）连到sampler节点上，发现物体消失，证明成功接收到了不透明物体的渲染结果。<br>&emsp;那之后的事情就简单了，只要给屏幕坐标一点干扰就行。<br>同加花纹噪声纹理一致，用时间和噪声来做一个动态的扰动，加到ScreenPosition的输出即可。要注意的是因为是直接处理坐标，即使是1都比较大，要将扰动remap到一个合理的范围。</p>
+<h2 id="混合各个部分"><a href="#混合各个部分" class="headerlink" title="混合各个部分"></a>混合各个部分</h2><p>&emsp;扰动是在另一个材质上，所以在Meshrenderer组件里加上相应材质就行，要注意设置Render Queue。<br>&emsp;力场材质里的各部分混合如下：<br>{（双面菲涅尔）add （边缘检测）} Blend：Overlay<a href="#bib5" id="bib5ref"><sup>[5]</sup></a> {花纹处理}</p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>这个效果我放在了我的开源仓库里<a target="_blank" rel="noopener" href="https://github.com/CXProject/ART-Effects_Collection_Unity">Art&amp;EffectCollection_Unity</a>。</p>
+<hr>
+<p><a id="bib1" href="#bib1ref"><sup>[1]</sup></a>: 默认的文件名为:UniversalRenderPipelineAsset<br><br><a id="bib2" href="#bib2ref"><sup>[2]</sup></a>: ScreebDepth节点:通过ZBuffer获得屏幕空间下的每个像素点的深度信息有三种采样模式：<br>&emsp;1.Linear01：返回0~1之前的深度信息<br>&emsp;2.raw：返回未处理的深度信息<br>&emsp;3.eye：返回转换成摄像机坐标的深度信息（前两个都跟近接平面有关）</p>
+<p><a id="bib3" href="#bib3ref"><sup>[3]</sup></a>:screenPosition节点：获取shader所应用的mesh的屏幕空间坐标，有4种模式：<br>&emsp;1.Default:返回屏幕坐标。这个模式屏幕坐标除了clip space position W。<br>&emsp;2.Raw 返回屏幕坐标。这个模式屏幕坐标没除clip space position W。其a通道为顶点的深度信息。<br>&emsp;3.Center 在default上添加了偏移，让 float2(0,0) 在屏幕的中心。 Tiled 在default添加了偏移，让float2(0,0) 在屏幕的中心并且使用frac进行tiled。</p>
+<p><a id="bib4" href="#bib4ref"><sup>[4]</sup></a>:SmoothStep节点：如果输入In在Edge1和Edge2之间，则返回<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%9F%83%E5%B0%94%E7%B1%B3%E7%89%B9%E6%8F%92%E5%80%BC/8113661">Hermite插值</a>。 如果In小于 Edge1，则返回0，如果In大于Edge2，则返回1。 这个节点类似于Lerp节点，但有两个显着差异。第一，此节点返回值介于0和1之间而Lerp返回值介于输入的A和B之间。第二，该节点使用平滑的Hermite插值而不是线性插值。Hermite插值在开始加速 并在最后减速。这对创建自然的动画，淡入淡出和其他转换非常有用。</p>
+<p><a id="bib5" href="#bib5ref"><sup>[5]</sup></a>:Blend节点：<br>&emsp;Overlay模式：这个模式下值小于0.5的按变暗处理，值大于0.5的按变亮处理。也就是说暗的地方会变得更暗，亮的地方会变得更亮。</p>
+
       
 
       
@@ -190,6 +206,25 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Art</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Effect</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">URP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
@@ -205,7 +240,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/04/Unity_Empty/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/11/07/211107_ShieldEffect_Unity/">展开全文 >></a>
         </p>
       
 
@@ -399,6 +434,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Art</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Effect</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">URP</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
