@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://cxproject.github.io">
   <title>C#调用外部程序 | CX_Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.使用场景&amp;emsp;有时候想要在多个Unity工程里共用同一个文件夹，就想用符号链接[1]去共享文件夹。这样就不用复制来复制去还可以即时同步。虽然在外部建立Bat文件甚至直接通过控制台命令就可以实现符号链接的功能，但是想要不离开Unity编辑器，通过编辑器的UI来实现该功能的话，就要能通过C#去执行bat文件（似乎C#有库能够实现C#代码创建符号链接，但很麻烦的样子，不如直接调用bat来得方便">
+  <meta name="description" content="使用场景&amp;emsp;有时候想要在多个Unity工程里共用同一个文件夹，就想用符号链接[1]去共享文件夹。这样就不用复制来复制去还可以即时同步。虽然在外部建立Bat文件甚至直接通过控制台命令就可以实现符号链接的功能，但是想要不离开Unity编辑器，通过编辑器的UI来实现该功能的话，就要能通过C#去执行bat文件（似乎C#有库能够实现C#代码创建符号链接，但很麻烦的样子，不如直接调用bat来得方便）。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C#调用外部程序">
 <meta property="og:url" content="https://cxproject.github.io/2021/11/09/211109-C-%E8%B0%83%E7%94%A8%E5%A4%96%E9%83%A8%E7%A8%8B%E5%BA%8F/index.html">
 <meta property="og:site_name" content="CX_Blog">
-<meta property="og:description" content="1.使用场景&amp;emsp;有时候想要在多个Unity工程里共用同一个文件夹，就想用符号链接[1]去共享文件夹。这样就不用复制来复制去还可以即时同步。虽然在外部建立Bat文件甚至直接通过控制台命令就可以实现符号链接的功能，但是想要不离开Unity编辑器，通过编辑器的UI来实现该功能的话，就要能通过C#去执行bat文件（似乎C#有库能够实现C#代码创建符号链接，但很麻烦的样子，不如直接调用bat来得方便">
+<meta property="og:description" content="使用场景&amp;emsp;有时候想要在多个Unity工程里共用同一个文件夹，就想用符号链接[1]去共享文件夹。这样就不用复制来复制去还可以即时同步。虽然在外部建立Bat文件甚至直接通过控制台命令就可以实现符号链接的功能，但是想要不离开Unity编辑器，通过编辑器的UI来实现该功能的话，就要能通过C#去执行bat文件（似乎C#有库能够实现C#代码创建符号链接，但很麻烦的样子，不如直接调用bat来得方便）。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-09T15:27:59.000Z">
-<meta property="article:modified_time" content="2021-11-09T16:52:32.135Z">
+<meta property="article:modified_time" content="2021-11-09T16:56:33.863Z">
 <meta property="article:author" content="CXProject">
 <meta property="article:tag" content="IO">
 <meta property="article:tag" content="bat">
@@ -190,17 +190,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-使用场景"><a href="#1-使用场景" class="headerlink" title="1.使用场景"></a>1.使用场景</h3><p>&emsp;有时候想要在多个Unity工程里共用同一个文件夹，就想用符号链接<a href="#bib1" id="bib1ref"><sup>[1]</sup></a>去共享文件夹。这样就不用复制来复制去还可以即时同步。虽然在外部建立Bat文件甚至直接通过控制台命令就可以实现符号链接的功能，但是想要不离开Unity编辑器，通过编辑器的UI来实现该功能的话，就要能通过C#去执行bat文件（似乎C#有库能够实现C#代码创建符号链接，但很麻烦的样子，不如直接调用bat来得方便）。</p>
-<h3 id="2-建立一个bat文件"><a href="#2-建立一个bat文件" class="headerlink" title="2.建立一个bat文件"></a>2.建立一个bat文件</h3><p>&emsp;建立符号链接命令很简单，新建一个文本文档，在里面输入：</p>
+        <h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>&emsp;有时候想要在多个Unity工程里共用同一个文件夹，就想用符号链接<a href="#bib1" id="bib1ref"><sup>[1]</sup></a>去共享文件夹。这样就不用复制来复制去还可以即时同步。虽然在外部建立Bat文件甚至直接通过控制台命令就可以实现符号链接的功能，但是想要不离开Unity编辑器，通过编辑器的UI来实现该功能的话，就要能通过C#去执行bat文件（似乎C#有库能够实现C#代码创建符号链接，但很麻烦的样子，不如直接调用bat来得方便）。</p>
+<h3 id="建立一个bat文件"><a href="#建立一个bat文件" class="headerlink" title="建立一个bat文件"></a>建立一个bat文件</h3><p>&emsp;建立符号链接命令很简单，新建一个文本文档，在里面输入：</p>
 <figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mklink /J %<span class="number">1</span> %<span class="number">2</span></span><br></pre></td></tr></table></figure>
 <p>将后缀名改为bat后就完成了。</p>
 <figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mklink /J /H /D Link Target</span><br><span class="line">        /D      创建目录符号链接。默认为文件符号链接。</span><br><span class="line">        /H      创建硬链接而非符号链接。</span><br><span class="line">        /J      创建目录联接。</span><br><span class="line">        Link    指定新的符号链接名称。</span><br><span class="line">        Target  指定新链接引用的路径(相对或绝对)</span><br></pre></td></tr></table></figure>
 <p>更详细地关于符号链接，硬链接和快捷方式的区别参看这个博文<a target="_blank" rel="noopener" href="https://blog.csdn.net/guyue35/article/details/49761347">Windows下mklink使用, 硬链接, 软链接和快捷方式的区别</a>。<br>注意：<br>&emsp;1. 由于斜杠代表命令的参数，所以Link和Target的路径分割必须是反斜杠。<br>&emsp;2. 新建立链接的路径所在的文件夹必须存在才能创建成功。</p>
 <p>通过%1~%9来传递参数：<br>&emsp;%[1-9]表示参数，参数是指在运行批处理文件时在文件名后加的以空格(或者Tab)分隔的字符串。<br>变量可以从%0到%9，%0表示批处理命令本身，其它参数字符串用 %1 到 %9 顺序表示。<br>例如：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">call test2.bat &quot;hello&quot; &quot;haha&quot; </span><br><span class="line">%1 就是 &quot;hello&quot;</span><br><span class="line">%2 就是 &quot;haha&quot;</span><br></pre></td></tr></table></figure>
-<h3 id="3-通过C-调外部程序"><a href="#3-通过C-调外部程序" class="headerlink" title="3.通过C#调外部程序"></a>3.通过C#调外部程序</h3><p>&emsp;就是是通过Process类调用外部程序以及执行dos命令。</p>
+<h3 id="通过C-调外部程序"><a href="#通过C-调外部程序" class="headerlink" title="通过C#调外部程序"></a>通过C#调外部程序</h3><p>&emsp;就是是通过Process类调用外部程序以及执行dos命令。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Process pro = new Process(); //实例化一个进程实例。</span><br><span class="line">pro.StartInfo.FileName = BATPath;//这里是指定要启动程序的路径。</span><br><span class="line">pro.StartInfo.Arguments = “targetFolder” + &#x27;\t&#x27; + origin; 这里就是加入参数，我这里用\t分割。</span><br><span class="line">pro.StartInfo.CreateNoWindow = false;\\设置显示窗口</span><br><span class="line">pro.Start(); \\启动</span><br><span class="line">pro.WaitForExit();\\等待外部程序运行完毕，会阻塞本进程</span><br></pre></td></tr></table></figure>
-<h3 id="4-写在后面"><a href="#4-写在后面" class="headerlink" title="4. 写在后面"></a>4. 写在后面</h3><p>&emsp;我在<a target="_blank" rel="noopener" href="https://github.com/CXProject/UnityToolchainsTrick/tree/main/Assets/Editor/CX_Examples/Example_03_Mklink">UnityToolchainsTrick</a> 实现了在文件夹上右键在创立符号链接的功能。在Example_03_Mklink文件夹里。</p>
+<h3 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h3><p>&emsp;我在<a target="_blank" rel="noopener" href="https://github.com/CXProject/UnityToolchainsTrick/tree/main/Assets/Editor/CX_Examples/Example_03_Mklink">UnityToolchainsTrick</a> 实现了在文件夹上右键在创立符号链接的功能。在Example_03_Mklink文件夹里。</p>
 <hr>
 <p><a id="bib1" href="#bib1ref"><sup>[1]</sup></a>: 又称软链接</p>
 
@@ -334,7 +334,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">1.使用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AAbat%E6%96%87%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">2.建立一个bat文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%80%9A%E8%BF%87C-%E8%B0%83%E5%A4%96%E9%83%A8%E7%A8%8B%E5%BA%8F"><span class="toc-number">3.</span> <span class="toc-text">3.通过C#调外部程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%86%99%E5%9C%A8%E5%90%8E%E9%9D%A2"><span class="toc-number">4.</span> <span class="toc-text">4. 写在后面</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AAbat%E6%96%87%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">建立一个bat文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87C-%E8%B0%83%E5%A4%96%E9%83%A8%E7%A8%8B%E5%BA%8F"><span class="toc-number">3.</span> <span class="toc-text">通过C#调外部程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%90%8E%E9%9D%A2"><span class="toc-number">4.</span> <span class="toc-text">写在后面</span></a></li></ol>
                     </div>
                 </span>
             </div>
