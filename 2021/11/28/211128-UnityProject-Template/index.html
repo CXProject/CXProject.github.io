@@ -6,29 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://cxproject.github.io">
-  <title>能量护盾特效_Unity版 | CX_Blog</title>
+  <title>Unity中制作自己的Project Template | CX_Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&amp;emsp;这是unityJapan办的官方演讲会中讲解的一个用shaderGraph制作能量护盾的例子。由于用到SG,所以是基于URP的。（HDRP应该也可以用）官方油管地址：https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v&#x3D;7ToExWKVZW0&amp;t&#x3D;2407s最终效果如图：主要分解为步骤步骤：&amp;emsp;1.检测物体之间的接触边缘&amp;emsp;2.画出透明物体的边缘&amp;em">
+  <meta name="description" content="&amp;emsp;在开始一个unity项目前，通常要根据项目需要来初始化项目的环境，例如导入需要的包，设置渲染管线等。有时候这种配置环境很麻烦还花时间，例如配置oculus的VR项目。那么我们就可以将一部分常用的设定保存为一个project template,同unity自带的template一样在新建工程时自动配置。 Template保存位置&amp;emsp;可以通过安装面板上对相应版本右键在资源管理器中显">
 <meta property="og:type" content="article">
-<meta property="og:title" content="能量护盾特效_Unity版">
-<meta property="og:url" content="https://cxproject.github.io/2021/11/07/211107_ShieldEffect_Unity/index.html">
+<meta property="og:title" content="Unity中制作自己的Project Template">
+<meta property="og:url" content="https://cxproject.github.io/2021/11/28/211128-UnityProject-Template/index.html">
 <meta property="og:site_name" content="CX_Blog">
-<meta property="og:description" content="&amp;emsp;这是unityJapan办的官方演讲会中讲解的一个用shaderGraph制作能量护盾的例子。由于用到SG,所以是基于URP的。（HDRP应该也可以用）官方油管地址：https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v&#x3D;7ToExWKVZW0&amp;t&#x3D;2407s最终效果如图：主要分解为步骤步骤：&amp;emsp;1.检测物体之间的接触边缘&amp;emsp;2.画出透明物体的边缘&amp;em">
+<meta property="og:description" content="&amp;emsp;在开始一个unity项目前，通常要根据项目需要来初始化项目的环境，例如导入需要的包，设置渲染管线等。有时候这种配置环境很麻烦还花时间，例如配置oculus的VR项目。那么我们就可以将一部分常用的设定保存为一个project template,同unity自带的template一样在新建工程时自动配置。 Template保存位置&amp;emsp;可以通过安装面板上对相应版本右键在资源管理器中显">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cxproject.github.io/2021/11/07/211107_ShieldEffect_Unity/Shield_01.png">
-<meta property="og:image" content="https://cxproject.github.io/2021/11/07/211107_ShieldEffect_Unity/Shield_02.png">
-<meta property="og:image" content="https://cxproject.github.io/2021/11/07/211107_ShieldEffect_Unity/Shield_03.png">
-<meta property="og:image" content="https://cxproject.github.io/2021/11/07/211107_ShieldEffect_Unity/Shield_04.png">
-<meta property="og:image" content="https://cxproject.github.io/2021/11/07/211107_ShieldEffect_Unity/Shield_05.png">
-<meta property="og:image" content="https://cxproject.github.io/2021/11/07/211107_ShieldEffect_Unity/Shield_06.png">
-<meta property="article:published_time" content="2021-11-06T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-11-07T10:30:01.461Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210717104749707.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhcmNvcl9jbg==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210717105255534.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhcmNvcl9jbg==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/202107171056090.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhcmNvcl9jbg==,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2021-11-28T14:19:07.000Z">
+<meta property="article:modified_time" content="2021-11-28T15:08:26.454Z">
 <meta property="article:author" content="CXProject">
-<meta property="article:tag" content="Art">
-<meta property="article:tag" content="Effect">
-<meta property="article:tag" content="URP">
+<meta property="article:tag" content="项目设置">
+<meta property="article:tag" content="Template">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cxproject.github.io/2021/11/07/211107_ShieldEffect_Unity/Shield_01.png">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210717104749707.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhcmNvcl9jbg==,size_16,color_FFFFFF,t_70">
   
   
     <link rel="icon" href="assets\img\favicon.png">
@@ -183,42 +179,40 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-211107_ShieldEffect_Unity" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-211128-UnityProject-Template" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      能量护盾特效_Unity版
+      Unity中制作自己的Project Template
     </h1>
   
 
         
-        <a href="/2021/11/07/211107_ShieldEffect_Unity/" class="archive-article-date">
-  	<time datetime="2021-11-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-07</time>
+        <a href="/2021/11/28/211128-UnityProject-Template/" class="archive-article-date">
+  	<time datetime="2021-11-28T14:19:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&emsp;这是unityJapan办的官方演讲会中讲解的一个用shaderGraph制作能量护盾的例子。由于用到SG,所以是基于URP的。（HDRP应该也可以用）<br>官方油管地址：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=7ToExWKVZW0&amp;t=2407s">https://www.youtube.com/watch?v=7ToExWKVZW0&amp;t=2407s</a><br>最终效果如图：<br><img src="/2021/11/07/211107_ShieldEffect_Unity/Shield_01.png" alt="最终效果"><br>主要分解为步骤步骤：<br>&emsp;<strong>1.检测物体之间的接触边缘</strong><br>&emsp;<strong>2.画出透明物体的边缘</strong><br>&emsp;<strong>3.给边缘加上花纹</strong><br>&emsp;<strong>4.扭曲透过物体的像</strong></p>
-<h2 id="检测物体之间的接触边缘"><a href="#检测物体之间的接触边缘" class="headerlink" title="检测物体之间的接触边缘"></a>检测物体之间的接触边缘</h2><h3 id="STEP1-设置管线创建一个新的Shader"><a href="#STEP1-设置管线创建一个新的Shader" class="headerlink" title="STEP1. 设置管线创建一个新的Shader"></a>STEP1. 设置管线创建一个新的Shader</h3><p>&emsp;由于要通过深度来检测接触边缘，所以在管线的配置文件<a href="#bib1" id="bib1ref"><sup>[1]</sup></a>将其中的Depth Texture勾选上。由于不需要进行光照计算，建立一个Unlit shader，将master节点设定改为transparent渲染队列和双面渲染。</p>
-<h3 id="STEP2-利用sceenDepth节点进行接触检测"><a href="#STEP2-利用sceenDepth节点进行接触检测" class="headerlink" title="STEP2. 利用sceenDepth节点进行接触检测"></a>STEP2. 利用sceenDepth节点进行接触检测</h3><p>&emsp;建立一个screenDepth<a href="#bib2" id="bib2ref"><sup>[2]</sup></a>节点，采样改为eye，这个节点是获得屏幕上每个像素点对应的深度信息（只能对应显示的非透明物体上的点）。再建立一个screenPosition<a href="#bib3" id="bib3ref"><sup>[3]</sup></a>节点，模式改为raw来获取该material所在物体的深度信息。把screenPosition节点里的w分量分出来，用sceenDepth节点输出的值去减，最后输出到master节点上的color看一下。发现同球体接触的边缘变黑。其实减去的值就是模型上点延视线方向达到的最近的非透明物体的距离，这个值0~∞的。于是设置一个变量a减去这个值的话，范围就变成-∞~0~a。因此可以通过a来控制边缘的厚度。由于透明度0-1，所以用smoothStep<a href="#bib4" id="bib4ref"><sup>[4]</sup></a>来限制输出值的范围，同时由于其插值的特性，用来做边缘光带的过渡。最终节点如图：<br><img src="/2021/11/07/211107_ShieldEffect_Unity/Shield_02.png" alt="边缘检测节点连接"></p>
-<h2 id="画出透明物体的边缘"><a href="#画出透明物体的边缘" class="headerlink" title="画出透明物体的边缘"></a>画出透明物体的边缘</h2><p>&emsp;一般的物体可以通过FresnelEffect节点简单的做出边缘发光的效果。但是对于双面绘制的物体行不通，因为由于菲涅尔的原理，导致背面的节点无法实现边缘发光的效果。于是根据菲涅尔的原理，要重新连一个适用于双面的菲涅尔。其实也很简单，就是将表面法线与视线方向单位向量点乘后取绝对值再用1减去这个值即可。<br><img src="/2021/11/07/211107_ShieldEffect_Unity/Shield_03.png" alt="双面菲涅尔原理"><br>连接的节点图如下：<br><img src="/2021/11/07/211107_ShieldEffect_Unity/Shield_04.png" alt="双面菲涅尔节点连接"></p>
-<h2 id="边缘加上花纹"><a href="#边缘加上花纹" class="headerlink" title="边缘加上花纹"></a>边缘加上花纹</h2><p>花纹图案的实现就比较简单，就是在原本基础上导入一张黑白花纹的图案（因为颜色控制是用baseColor）。之后再叠加一层噪声纹理，通过UV动画让花纹动起来就行。有趣的是可以通过UV和和sin节点，形成移动的黑白条纹。因为有sin会有负值，再用remap重映射至0~1。<br><img src="/2021/11/07/211107_ShieldEffect_Unity/Shield_05.png" alt="黑白条纹连接"></p>
-<h2 id="扭曲透过物体的像"><a href="#扭曲透过物体的像" class="headerlink" title="扭曲透过物体的像"></a>扭曲透过物体的像</h2><p>&emsp;接下来要做给透过护盾时光线扭曲的效果。 由于之前的shader是用了alpha通道，而扭曲像其实是通过将渲染不透明物体后的结果按屏幕坐标贴到物体上来实现的。由于透过的地方本来alpha为零，也就无法显示贴上去的颜色，所以要另开一个shader和材质做目标物体的第二材质，同时要保证这个材质的的渲染队列在力场材质之前。</p>
-<h3 id="STEP1-设置管线创建一个新的Shader-1"><a href="#STEP1-设置管线创建一个新的Shader-1" class="headerlink" title="STEP1. 设置管线创建一个新的Shader"></a>STEP1. 设置管线创建一个新的Shader</h3><p>由于要要获得不透明物体的渲染结果，在渲染管线的配置文件<a href="#bib1" id="bib1ref"><sup>[1]</sup></a>的设定中开启Opaque Texture。由于同样不需要进行光照计算，建立一个Unlit shader，将master节点设定改为transparent渲染队列。</p>
-<h3 id="STEP2-接受不透明物体的渲染结果"><a href="#STEP2-接受不透明物体的渲染结果" class="headerlink" title="STEP2. 接受不透明物体的渲染结果"></a>STEP2. 接受不透明物体的渲染结果</h3><p>建一个texture2D的变量，reference填入_CameraOpaqueTexture，将expored勾去掉，即可用来接收渲染场景的贴图。<br><img src="/2021/11/07/211107_ShieldEffect_Unity/Shield_06.png" alt="接受变量的设置"></p>
-<p>将这个texture和ScreenPosition<a href="#bib3" id="bib3ref"><sup>[3]</sup></a>（这回用default模式）连到sampler节点上，发现物体消失，证明成功接收到了不透明物体的渲染结果。<br>&emsp;那之后的事情就简单了，只要给屏幕坐标一点干扰就行。<br>同加花纹噪声纹理一致，用时间和噪声来做一个动态的扰动，加到ScreenPosition的输出即可。要注意的是因为是直接处理坐标，即使是1都比较大，要将扰动remap到一个合理的范围。</p>
-<h2 id="混合各个部分"><a href="#混合各个部分" class="headerlink" title="混合各个部分"></a>混合各个部分</h2><p>&emsp;扰动是在另一个材质上，所以在Meshrenderer组件里加上相应材质就行，要注意设置Render Queue。<br>&emsp;力场材质里的各部分混合如下：<br>&emsp;&emsp;{（双面菲涅尔）add （边缘检测）} Blend：Overlay<a href="#bib5" id="bib5ref"><sup>[5]</sup></a> {花纹处理}</p>
-<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>这个效果我放在了我的开源仓库里<a target="_blank" rel="noopener" href="https://github.com/CXProject/ART-Effects_Collection_Unity">Art&amp;EffectCollection_Unity</a>。</p>
-<hr>
-<p><a id="bib1" href="#bib1ref"><sup>[1]</sup></a>: 默认的文件名为:UniversalRenderPipelineAsset<br><br><a id="bib2" href="#bib2ref"><sup>[2]</sup></a>: ScreebDepth节点:通过ZBuffer获得屏幕空间下的每个像素点的深度信息有三种采样模式：<br>&emsp;1.Linear01：返回0~1之前的深度信息<br>&emsp;2.raw：返回未处理的深度信息<br>&emsp;3.eye：返回转换成摄像机坐标的深度信息（前两个都跟近接平面有关）</p>
-<p><a id="bib3" href="#bib3ref"><sup>[3]</sup></a>:screenPosition节点：获取shader所应用的mesh的屏幕空间坐标，有4种模式：<br>&emsp;1.Default:返回屏幕坐标。这个模式屏幕坐标除了clip space position W。<br>&emsp;2.Raw 返回屏幕坐标。这个模式屏幕坐标没除clip space position W。其a通道为顶点的深度信息。<br>&emsp;3.Center 在default上添加了偏移，让 float2(0,0) 在屏幕的中心。 Tiled 在default添加了偏移，让float2(0,0) 在屏幕的中心并且使用frac进行tiled。</p>
-<p><a id="bib4" href="#bib4ref"><sup>[4]</sup></a>:SmoothStep节点：如果输入In在Edge1和Edge2之间，则返回<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%9F%83%E5%B0%94%E7%B1%B3%E7%89%B9%E6%8F%92%E5%80%BC/8113661">Hermite插值</a>。 如果In小于 Edge1，则返回0，如果In大于Edge2，则返回1。 这个节点类似于Lerp节点，但有两个显着差异。第一，此节点返回值介于0和1之间而Lerp返回值介于输入的A和B之间。第二，该节点使用平滑的Hermite插值而不是线性插值。Hermite插值在开始加速 并在最后减速。这对创建自然的动画，淡入淡出和其他转换非常有用。</p>
-<p><a id="bib5" href="#bib5ref"><sup>[5]</sup></a>:Blend节点：<br>&emsp;Overlay模式：这个模式下值小于0.5的按变暗处理，值大于0.5的按变亮处理。也就是说暗的地方会变得更暗，亮的地方会变得更亮。</p>
+        <p>&emsp;在开始一个unity项目前，通常要根据项目需要来初始化项目的环境，例如导入需要的包，设置渲染管线等。有时候这种配置环境很麻烦还花时间，例如配置oculus的VR项目。那么我们就可以将一部分常用的设定保存为一个project template,同unity自带的template一样在新建工程时自动配置。</p>
+<h3 id="Template保存位置"><a href="#Template保存位置" class="headerlink" title="Template保存位置"></a>Template保存位置</h3><p>&emsp;可以通过安装面板上对相应版本右键在资源管理器中显示。之后在这个文件夹下的Data\Resources\PackageManager\ProjectTemplates，就可以看到保存template的文件，是tgz格式压缩的。<br><img src="https://img-blog.csdnimg.cn/20210717104749707.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhcmNvcl9jbg==,size_16,color_FFFFFF,t_70" alt="template"></p>
+<h3 id="通过修改默认Template来创建自己的Template"><a href="#通过修改默认Template来创建自己的Template" class="headerlink" title="通过修改默认Template来创建自己的Template"></a>通过修改默认Template来创建自己的Template</h3><h4 id="1-创建一个配置好环境的工程作为模板的基础"><a href="#1-创建一个配置好环境的工程作为模板的基础" class="headerlink" title="1.创建一个配置好环境的工程作为模板的基础"></a>1.创建一个配置好环境的工程作为模板的基础</h4><p>&emsp;正常创建项目。放入需要的资源，配置好package就行。不要在Assets文件夹里留太多资源，因为之后都要打到包里，再创建时复制时间也很慢，也占c盘空间。</p>
+<h4 id="2-任意选择一个默认template解压"><a href="#2-任意选择一个默认template解压" class="headerlink" title="2.任意选择一个默认template解压"></a>2.任意选择一个默认template解压</h4><p>解压完毕会发现是一个package文件夹，里面是这些内容。<br><img src="https://img-blog.csdnimg.cn/20210717105255534.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhcmNvcl9jbg==,size_16,color_FFFFFF,t_70" alt="解压内容"></p>
+<h4 id="3-复制对应数据到ProjectData-文件夹里"><a href="#3-复制对应数据到ProjectData-文件夹里" class="headerlink" title="3.复制对应数据到ProjectData~文件夹里"></a>3.复制对应数据到ProjectData~文件夹里</h4><p>&emsp;将这里头原先的有的东西都删掉。然后从之前准备好的工程里把assets、Packages和ProjectSettings三个文件夹复制到ProjectData~文件夹里，注意在复制前要删除ProjectSetting文件夹里的ProjectVersion.txt文件，不然的话在生成工程时会报错。</p>
+<h4 id="4-配置Package-json文件"><a href="#4-配置Package-json文件" class="headerlink" title="4.配置Package.json文件"></a>4.配置Package.json文件</h4><p>&emsp;这个文件就是用来描述Template信息的，主要修改以下方面：</p>
+<ul>
+<li>template的名字</li>
+<li>显示信息</li>
+<li>描述信息</li>
+<li>依赖（依赖感觉其实无所谓，因为之后也会把package的manifest复制进去）。</li>
+<li>dependenices之后的可以不用改，亲测把其中内容删掉也没关系。<br>&emsp;<br><img src="https://img-blog.csdnimg.cn/202107171056090.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhcmNvcl9jbg==,size_16,color_FFFFFF,t_70" alt="Package.json"></li>
+</ul>
+<h4 id="5-打包package文件夹"><a href="#5-打包package文件夹" class="headerlink" title="5.打包package文件夹"></a>5.打包package文件夹</h4><p>&emsp;我这里是用的7-zip，先选择tar压缩，生成*.tar文件（命名根据默认template的格式写一个），把这个文件选择gzip压缩再压缩成.tar.gz文件。手动修改后缀为tgz。最后把这个文件放回之前保存template文件的文件夹。就完成了自制template。<br>&emsp;之后重启UnityHub，选择相应的版本在创建项目面板的模板里能看到刚刚创建的template。<br>&emsp;注意保存自建的template副本，因为在卸载unity时，这些template也会被删除。</p>
 
       
 
@@ -232,15 +226,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Art</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">项目设置</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Effect</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">URP</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Template</a>
         		</li>
       		
 		</ul>
@@ -307,7 +297,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://cxproject.github.io/2021/11/07/211107_ShieldEffect_Unity/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://cxproject.github.io/2021/11/28/211128-UnityProject-Template/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -321,18 +311,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/11/09/211109-C-%E8%B0%83%E7%94%A8%E5%A4%96%E9%83%A8%E7%A8%8B%E5%BA%8F/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          C#调用外部程序
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/11/04/UE4_Empty/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">UE4相关文章</div>
+    <a href="/2021/11/22/Lighthouse-Model/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">灯塔模型练习</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -351,19 +332,6 @@
             </div>
         </div>
         
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%B5%8B%E7%89%A9%E4%BD%93%E4%B9%8B%E9%97%B4%E7%9A%84%E6%8E%A5%E8%A7%A6%E8%BE%B9%E7%BC%98"><span class="toc-number">1.</span> <span class="toc-text">检测物体之间的接触边缘</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#STEP1-%E8%AE%BE%E7%BD%AE%E7%AE%A1%E7%BA%BF%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84Shader"><span class="toc-number">1.1.</span> <span class="toc-text">STEP1. 设置管线创建一个新的Shader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#STEP2-%E5%88%A9%E7%94%A8sceenDepth%E8%8A%82%E7%82%B9%E8%BF%9B%E8%A1%8C%E6%8E%A5%E8%A7%A6%E6%A3%80%E6%B5%8B"><span class="toc-number">1.2.</span> <span class="toc-text">STEP2. 利用sceenDepth节点进行接触检测</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%BB%E5%87%BA%E9%80%8F%E6%98%8E%E7%89%A9%E4%BD%93%E7%9A%84%E8%BE%B9%E7%BC%98"><span class="toc-number">2.</span> <span class="toc-text">画出透明物体的边缘</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%B9%E7%BC%98%E5%8A%A0%E4%B8%8A%E8%8A%B1%E7%BA%B9"><span class="toc-number">3.</span> <span class="toc-text">边缘加上花纹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%AD%E6%9B%B2%E9%80%8F%E8%BF%87%E7%89%A9%E4%BD%93%E7%9A%84%E5%83%8F"><span class="toc-number">4.</span> <span class="toc-text">扭曲透过物体的像</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#STEP1-%E8%AE%BE%E7%BD%AE%E7%AE%A1%E7%BA%BF%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84Shader-1"><span class="toc-number">4.1.</span> <span class="toc-text">STEP1. 设置管线创建一个新的Shader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#STEP2-%E6%8E%A5%E5%8F%97%E4%B8%8D%E9%80%8F%E6%98%8E%E7%89%A9%E4%BD%93%E7%9A%84%E6%B8%B2%E6%9F%93%E7%BB%93%E6%9E%9C"><span class="toc-number">4.2.</span> <span class="toc-text">STEP2. 接受不透明物体的渲染结果</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B7%E5%90%88%E5%90%84%E4%B8%AA%E9%83%A8%E5%88%86"><span class="toc-number">5.</span> <span class="toc-text">混合各个部分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">6.</span> <span class="toc-text">写在最后</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
         
     </div>
 </aside>
